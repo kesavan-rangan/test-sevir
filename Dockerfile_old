@@ -1,0 +1,9 @@
+ARG LAMBDA_TASK_ROOT="/app"
+FROM python3.8-slim
+WORKDIR /app
+COPY app .
+COPY requirements.txt  .
+RUN  pip3 install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
+CMD [ "main.handler" ] 
+RUN uvicorn app.main:app --reload
+EXPOSE 8000
