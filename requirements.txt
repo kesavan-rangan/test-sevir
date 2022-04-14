@@ -1,13 +1,11 @@
-
 pandas
-
 requests==2.27.1
 mangum==0.11.0
 uvicorn
 fastapi
 gunicorn
 transformers==4.18.0
-google-cloud-storage
+#google-cloud-storage
 torch
 #torchvision
 #torchaudio

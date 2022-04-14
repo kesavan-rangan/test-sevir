@@ -3,14 +3,16 @@ import pandas as pd
 import json
 import time
 import uvicorn
+import os
+import shutil
 from fastapi import FastAPI, Request
-from spacy import displacy
 from random import sample
 from transformers import pipeline
-from google.cloud import storage
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from mangum import Mangum
+import os
+from transformers import AutoConfig
 
 
 # def parse_dataframe(df):
@@ -25,8 +27,24 @@ app = FastAPI(
 )
 
 #app.mount("/static", StaticFiles(directory="static"), name="static")
+print("DEBUGG")
+print(os.getcwd())
+print(os.listdir())
 
-summarizer = pipeline("summarization",model="t5-small", tokenizer="t5-small")
+model = "t5-small"
+model_path = os.path.join(os.getcwd(), model) 
+if not os.path.exists(model_path):
+    os.makedirs(model_path)
+    if os.path.exists("config.json"):
+            shutil.move("config.json", model_path)
+    print("DEBUGG -- 2")
+    print(os.listdir(model_path))
+
+# summarizer = pipeline("summarization", model=model, tokenizer=model)
+config = AutoConfig.from_pretrained('t5-small')
+
+summarizer = pipeline("summarization")
+
 
 #nlp = spacy.load("en_core_web_sm")
 
