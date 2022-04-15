@@ -5,7 +5,6 @@ uvicorn
 fastapi
 gunicorn
 transformers==4.18.0
-#google-cloud-storage
 torch
-#torchvision
-#torchaudio
+boto3
+botocore
